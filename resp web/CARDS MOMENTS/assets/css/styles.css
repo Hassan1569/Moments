@@ -1,0 +1,205 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --product-first-color: hsl(0, 8%, 88%);
+  --product-title-color: hsl(0, 0%, 0%);
+  --product-text-color: hsl(0, 0%, 100%);
+  --product-body-color: hsl(0, 100%, 99%);
+  --product-container-color: hsl(0, 0%, 0%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --product-body-font: "Poppins", sans-serif;
+  --product-h2-font-size: 1.25rem;
+  --product-small-font-size: .813rem;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1120px) {
+  :root {
+    --product-h2-font-size: 1.5rem;
+    --product-small-font-size: .875rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--product-body-font);
+  background-color: var(--product-body-color);
+  color: var(--product-text-color);
+}
+
+img {
+   display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== CARD ===============*/
+  .product-container {
+    display: grid;
+    place-items: center;
+    margin-inline: 1.5rem;
+    padding-block: 5rem;
+  }
+
+  .product-card__container {
+    display: grid;
+    row-gap: 3.5rem;
+  }
+
+  .product-card__article {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card__img {
+    width: 328px;
+    border-radius: 1.5rem;
+  }
+
+  .product-card__data {
+    width: 280px;
+    background-color: var(--product-container-color);
+    padding: 1.5rem 2rem;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    border-radius: 1rem;
+    position: absolute;
+    bottom: -9rem;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    opacity: 0;
+    transition: opacity 1s 1s;
+  }
+
+  .product-card__description {
+    display: block;
+    font-size: var(--product-small-font-size);
+    margin-bottom: .25rem;
+  }
+
+  .product-card__title {
+    font-size: var(--product-h2-font-size);
+    font-weight: 500;
+    color:white;
+    margin-bottom: .75rem;
+  }
+
+  .product-card__button {
+    align-items: center;
+    text-decoration: none;
+    font-size: var(--product-small-font-size);
+    font-weight: 500;
+    color: var(--first-color);
+  }
+
+  .product-card__button:hover {
+    text-decoration: underline;
+  }
+
+  /* Naming animations in hover */
+  .product-card__article:hover .product-card__data {
+    animation: show-data 1s forwards;
+    opacity: 1;
+    transition: opacity .3s;
+  }
+
+  .product-card__article:hover {
+    animation: remove-overflow 2s forwards;
+  }
+
+  .product-card__article:not(:hover) {
+    animation: show-overflow 2s forwards;
+  }
+
+  .product-card__article:not(:hover) .product-card__data {
+    animation: remove-data 1s forwards;
+  }
+
+  /* Card animation */
+  @keyframes show-data {
+    50% {
+      transform: translateY(-10rem);
+    }
+    100% {
+      transform: translateY(-7rem);
+    }
+  }
+
+  @keyframes remove-overflow {
+    to {
+      overflow: initial;
+    }
+  }
+
+  @keyframes remove-data {
+    0% {
+      transform: translateY(-7rem);
+    }
+    50% {
+      transform: translateY(-10rem);
+    }
+    100% {
+      transform: translateY(.5rem);
+    }
+  }
+
+  @keyframes show-overflow {
+    0% {
+      overflow: initial;
+      pointer-events: none;
+    }
+    50% {
+      overflow: hidden;
+    }
+  }
+
+  /*=============== BREAKPOINTS ===============*/
+  /* For small devices */
+  @media screen and (max-width: 340px) {
+    .product-container {
+      margin-inline: 1rem;
+    }
+
+    .product-card__data {
+      width: 250px;
+      padding: 1rem;
+    }
+  }
+
+  /* For medium devices */
+  @media screen and (min-width: 768px) {
+    .product-card__container {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1.5rem;
+    }
+  }
+
+  /* For large devices */
+  @media screen and (min-width: 1120px) {
+    .product-container {
+      height: 100vh;
+    }
+
+    .product-card__container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .product-card__img {
+      width: 348px;
+    }
+    .product-card__data {
+      width: 316px;
+      padding-inline: 2.5rem;
+    }
+  }
